@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Designing a URL Shortener: A System Design Interview Walkthrough</title>
+<style>body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;line-height:1.6;color:#222}</style></head><body>
+<h1>Designing a URL Shortener: A System Design Interview Walkthrough</h1>
+<p>The URL shortener is often the first system design question candidates see. It's small enough to finish in 45 minutes but rich enough to show how you think about scale.</p>
+<h2>1. Clarify requirements</h2>
+<p>Ask about read/write ratio (usually heavily read), expected volume, custom aliases, expiration, and analytics. Write the answers down; they drive every later choice.</p>
+<h2>2. Estimate</h2>
+<p>At 100 million new links a month and a 100:1 read ratio, you're near 40 writes and 4,000 reads per second. Seven Base62 characters give about 3.5 trillion codes, which is plenty.</p>
+<h2>3. Generate codes</h2>
+<p>Hashing the long URL risks collisions. A cleaner option is a distributed counter or pre-allocated ID ranges per server, encoded in Base62. Mention both and pick one with a reason.</p>
+<h2>4. Store and serve</h2>
+<p>A key-value store maps code to URL. Put a cache in front, since a small fraction of links gets most of the traffic. Return a 301 or 302 redirect depending on whether you need click analytics.</p>
+<h2>5. Talk about failure</h2>
+<p>What happens if the cache dies, or a region goes down? Interviewers reward candidates who bring this up without being asked.</p>
+<p>Practicing this flow out loud a few times makes a huge difference. A tool for <a href="https://www.ai-interviewcopilot.com/">live interview coaching</a> can play the interviewer and push back on your estimates the way a real one would.</p>
+<p><em>Written by the AI Interview Copilot team.</em></p>
+</body></html>
